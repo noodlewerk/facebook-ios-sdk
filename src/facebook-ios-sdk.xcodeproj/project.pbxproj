@@ -6,6 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		B3C60054160FA59900E8D0CF /* FacebookSDKUniversal */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = B3C60057160FA59900E8D0CF /* Build configuration list for PBXAggregateTarget "FacebookSDKUniversal" */;
+			buildPhases = (
+				B3C60059160FA59E00E8D0CF /* Build static library and framework */,
+			);
+			dependencies = (
+			);
+			name = FacebookSDKUniversal;
+			productName = FacebookSDKUniversal;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		2A68590615C1E37E001D4EDD /* FBSettings+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A68590515C1E37E001D4EDD /* FBSettings+Internal.h */; };
 		5F7CB4201553ACC600C183CF /* FBLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F7CB41E1553ACC600C183CF /* FBLogger.h */; };
@@ -661,6 +675,7 @@
 			targets = (
 				D2AAC07D0554694100DB518D /* facebook-ios-sdk */,
 				B9CBC518152537270036AA71 /* FacebookSDKTests */,
+				B3C60054160FA59900E8D0CF /* FacebookSDKUniversal */,
 			);
 		};
 /* End PBXProject section */
@@ -680,6 +695,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		B3C60059160FA59E00E8D0CF /* Build static library and framework */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Build static library and framework";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/sh\n#\n# Xcode Run Script for building iOS static framework.\n#\n# Requires a preconfigured Cocoa Touch Static Library.\n# Usage:\n#   1. Open project > Add Target > iOS Aggregate > Finish\n#   2. Add Build Phase > Add Run Script > Paste\n#   3. Manually assign PROJECT, TARGET, HEADERS, PRODUCT, OUTPUT\n#   4. Run outputs to ${SRCROOT}/build\n#\n# License: Public Domain\n# Author:  Leonard van Driel, 2012\n\n#set -e\n\necho \"Configure script\"\nPROJECT=\"facebook-ios-sdk\"\nTARGET=\"facebook-ios-sdk\"\nHEADERS=\"facebook-ios-sdk\"\nPRODUCT=\"facebook_ios_sdk\"\nOUTPUT=\"FacebookSDK\"\n\necho \"Remove previous products\"\nrm -rf \"${SRCROOT}/build/$OUTPUT/\"\nrm -rf \"${SRCROOT}/build/$OUTPUT.framework/\"\n\necho \"Build static lib for iphoneos and iphonesimulator\"\nxcodebuild -project \"${SRCROOT}/$PROJECT.xcodeproj\" -target $TARGET -configuration Release -arch \"armv6 armv7 armv7s\" -sdk iphoneos\nxcodebuild -project \"${SRCROOT}/$PROJECT.xcodeproj\" -target $TARGET -configuration Release -arch i386 -sdk iphonesimulator\n\necho \"Populate static library directory\"\nmkdir -p \"${SRCROOT}/build/$OUTPUT/Resources\"\nlipo -create -output \"${SRCROOT}/build/$OUTPUT/lib$OUTPUT.a\" \"${SRCROOT}/build/Release-iphoneos/lib$PRODUCT.a\" \"${SRCROOT}/build/Release-iphonesimulator/lib$PRODUCT.a\"\ncp -R \"${SRCROOT}/build/Release-iphoneos/$HEADERS\" \"${SRCROOT}/build/$OUTPUT/Headers\"\ncp -R \"${SRCROOT}/FBUserSettingsViewResources.bundle\" \"${SRCROOT}/build/$OUTPUT/Resources\"\ncp -R \"${SRCROOT}/FacebookSDKResources.bundle\" \"${SRCROOT}/build/$OUTPUT/Resources\"\n\necho \"Populate static framework\"\nmkdir -p \"${SRCROOT}/build/$OUTPUT.framework/Versions/A\"\ncp -R \"${SRCROOT}/build/$OUTPUT/Headers\" \"${SRCROOT}/build/$OUTPUT.framework/Versions/A\"\ncp -R \"${SRCROOT}/build/$OUTPUT/Resources\" \"${SRCROOT}/build/$OUTPUT.framework/Versions/A\"\ncp \"${SRCROOT}/build/$OUTPUT/lib$OUTPUT.a\" \"${SRCROOT}/build/$OUTPUT.framework/Versions/A/$OUTPUT\"\n\necho \"Link framework skeleton\"\nln -s \"A\" \"${SRCROOT}/build/$OUTPUT.framework/Versions/Current\"\nln -s \"Versions/Current/Headers\" \"${SRCROOT}/build/$OUTPUT.framework/Headers\"\nln -s \"Versions/Current/Resources\" \"${SRCROOT}/build/$OUTPUT.framework/Resources\"\nln -s \"Versions/Current/$OUTPUT\" \"${SRCROOT}/build/$OUTPUT.framework/$OUTPUT\"\n\necho \"Clean up intermediates\"\nrm -rf \"${SRCROOT}/build/Release-iphoneos/\"\nrm -rf \"${SRCROOT}/build/Release-iphonesimulator/\"\nrm -rf \"${SRCROOT}/build/$TARGET.build/\"\n\necho \"Done\"\n";
+			showEnvVarsInLog = 0;
+		};
 		B9CBC517152537270036AA71 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -883,6 +913,20 @@
 			};
 			name = Release;
 		};
+		B3C60055160FA59900E8D0CF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		B3C60056160FA59900E8D0CF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		B9CBC529152537270036AA71 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -968,6 +1012,15 @@
 			buildConfigurations = (
 				1DEB922308733DC00010E9CD /* Debug */,
 				1DEB922408733DC00010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B3C60057160FA59900E8D0CF /* Build configuration list for PBXAggregateTarget "FacebookSDKUniversal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B3C60055160FA59900E8D0CF /* Debug */,
+				B3C60056160FA59900E8D0CF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
