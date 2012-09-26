@@ -68,7 +68,7 @@
                                                          ofType:@"bundle"];
         self.bundle = [NSBundle bundleWithPath:path];
         if (self.bundle == nil) {
-            NSLog(@"WARNING: FBUserSettingsViewController could not find FBUserSettingsViewResources.bundle");
+            NWLogInfo(@"WARNING: FBUserSettingsViewController could not find FBUserSettingsViewResources.bundle");
         }
     }
     return self;

@@ -19,11 +19,11 @@
 #define CHECK_SQLITE(res, expectedResult, db) { \
     int result = (res); \
     if (result != expectedResult) { \
-        NSLog(@"FBCacheIndex: Expecting result %d, actual %d", \
+        NWLogInfo(@"FBCacheIndex: Expecting result %d, actual %d", \
             expectedResult, \
             result); \
         if (db) { \
-            NSLog(@"FBCacheIndex: SQLite error: %s", sqlite3_errmsg(db)); \
+            NWLogInfo(@"FBCacheIndex: SQLite error: %s", sqlite3_errmsg(db)); \
         } \
         NSCAssert(NO, @""); \
     } \

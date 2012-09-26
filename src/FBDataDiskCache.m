@@ -169,7 +169,7 @@ static NSString *const kAccessTokenKey = @"access_token";
             }
         }
     } @catch (NSException* exception) {
-        NSLog(@"FBDiskCache error: %@", exception.reason);
+        NWLogInfo(@"FBDiskCache error: %@", exception.reason);
     } @finally {
         return data;
     }
@@ -182,7 +182,7 @@ static NSString *const kAccessTokenKey = @"access_token";
         [_inMemoryCache removeObjectForKey:url];
         [_cacheIndex removeEntryForKey:url.absoluteString];
     } @catch (NSException* exception) {
-        NSLog(@"FBDiskCache error: %@", exception.reason);
+        NWLogInfo(@"FBDiskCache error: %@", exception.reason);
     }
 }
 
@@ -220,7 +220,7 @@ static NSString *const kAccessTokenKey = @"access_token";
             forKey:url 
             cost:data.length];
     } @catch (NSException* exception) {
-        NSLog(@"FBDiskCache error: %@", exception.reason);
+        NWLogInfo(@"FBDiskCache error: %@", exception.reason);
     }
 }
 

@@ -399,7 +399,7 @@ static NSString *const kPostHTTPMethod = @"POST";
         if ([value isKindOfClass:[UIImage class]]
             || [value isKindOfClass:[NSData class]]) {
             if ([httpMethod isEqualToString:kGetHTTPMethod]) {
-                NSLog(@"can not use GET to upload a file");
+                NWLogInfo(@"can not use GET to upload a file");
             }
             continue;
         }

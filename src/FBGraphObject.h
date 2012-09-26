@@ -51,7 +51,7 @@
    id&#060;FBGraphPlace&#062; place = placePicker.selection;
  
    // we'll use logging to show the simple typed property access to place and location info
-   NSLog(@"place=%@, city=%@, state=%@, lat long=%@ %@", 
+   NWLogInfo(@"place=%@, city=%@, state=%@, lat long=%@ %@", 
      place.name,
      place.location.city,
      place.location.state,

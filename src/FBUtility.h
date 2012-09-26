@@ -46,7 +46,7 @@
 do { \
     if (!(condition)) {	\
         NSString *msg = [NSString stringWithFormat:(desc), ##__VA_ARGS__]; \
-        NSLog(@"FBConditionalLog: %@", msg); \
+        NWLogInfo(@"FBConditionalLog: %@", msg); \
     } \
 } while(NO)
  

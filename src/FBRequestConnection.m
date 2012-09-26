@@ -951,7 +951,7 @@ typedef enum FBRequestConnectionState {
     
     if (!error) {
         if ([self.requests count] != [results count]) {
-            NSLog(@"Expected %d results, got %d", [self.requests count], [results count]);
+            NWLogInfo(@"Expected %d results, got %d", [self.requests count], [results count]);
             error = [self errorWithCode:FBErrorProtocolMismatch
                              statusCode:statusCode
                      parsedJSONResponse:results
@@ -1273,7 +1273,7 @@ typedef enum FBRequestConnectionState {
     }
     NSError *result = nil;
     if (innerError || ((statusCode < 200) || (statusCode >= 300))) {
-        NSLog(@"Error: HTTP status code: %d", statusCode);
+        NWLogInfo(@"Error: HTTP status code: %d", statusCode);
         result = [self errorWithCode:FBErrorHTTPError
                           statusCode:statusCode
                   parsedJSONResponse:response

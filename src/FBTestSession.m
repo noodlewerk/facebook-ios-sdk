@@ -216,7 +216,7 @@ tokenCachingStrategy:(FBSessionTokenCachingStrategy*)tokenCachingStrategy
              [self transitionToOpenWithToken:userToken];
          } else {
              if (error) {
-                 NSLog(@"Error: [FBSession createNewTestUserAndRename:] failed with error: %@", error.description);
+                 NWLogInfo(@"Error: [FBSession createNewTestUserAndRename:] failed with error: %@", error.description);
              } else {
                  // we fetched something unexpected when requesting an app token
                  error = [FBSession errorLoginFailedWithReason:FBErrorLoginFailedReasonUnitTestResponseUnrecognized
@@ -573,7 +573,7 @@ tokenCachingStrategy:(FBSessionTokenCachingStrategy*)tokenCachingStrategy
                                                               encoding:NSUTF8StringEncoding]
                                         autorelease];
         if (!data || [body isEqualToString:@"false"]) {
-            NSLog(@"FBSession !delete test user with id:%@ error:%@", userID, error ? error : body);
+            NWLogInfo(@"FBSession !delete test user with id:%@ error:%@", userID, error ? error : body);
         }         
     }
 }

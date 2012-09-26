@@ -112,7 +112,7 @@ static dispatch_once_t g_publishInstallOnceToken;
                         g_publishInstallOnceToken = 0;
                     }
                 } @catch (NSException *ex1) {
-                    NSLog(@"Failure after install publish: %@", ex1.reason);
+                    NWLogInfo(@"Failure after install publish: %@", ex1.reason);
                 }
             };
 
@@ -143,7 +143,7 @@ static dispatch_once_t g_publishInstallOnceToken;
                             [defaults synchronize];
                         }
                     } @catch (NSException *ex2) {
-                        NSLog(@"Failure during install publish: %@", ex2.reason);
+                        NWLogInfo(@"Failure during install publish: %@", ex2.reason);
                     }
                 }
             };
@@ -153,7 +153,7 @@ static dispatch_once_t g_publishInstallOnceToken;
             [pingRequest startWithCompletionHandler:pingCompletionBlock];
         }
     } @catch (NSException *ex3) {
-        NSLog(@"Failure before/during install ping: %@", ex3.reason);
+        NWLogInfo(@"Failure before/during install ping: %@", ex3.reason);
     }
 }
 
