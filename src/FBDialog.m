@@ -669,6 +669,13 @@ params   = _params;
     if ([_delegate respondsToSelector:@selector(dialogCompleteWithUrl:)]) {
         [_delegate dialogCompleteWithUrl:url];
     }
+    /* edit van Jorn */
+    // Cancel button geeft ook een "succes" mee
+    if([url.absoluteString isEqualToString:@"fbconnect://success"]){
+        [self dismissWithSuccess:NO animated:YES];
+        return;
+    }
+    /* end edit */
     [self dismissWithSuccess:YES animated:YES];
 }
 
