@@ -665,10 +665,9 @@ params   = _params;
 }
 
 - (void)dialogDidSucceed:(NSURL *)url {
-    
-    if ([_delegate respondsToSelector:@selector(dialogCompleteWithUrl:)]) {
-        [_delegate dialogCompleteWithUrl:url];
-    }
+//    if ([_delegate respondsToSelector:@selector(dialogCompleteWithUrl:)]) {
+//        [_delegate dialogCompleteWithUrl:url];
+//    }
     /* edit van Jorn */
     // Cancel button geeft ook een "succes" mee
     if([url.absoluteString isEqualToString:@"fbconnect://success"]){
